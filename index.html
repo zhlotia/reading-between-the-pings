@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reading Between the Pings</title>
+<meta name="description" content="A 6-question read on how a client, stakeholder, or colleague communicates, and how to adapt your approach to them.">
+<meta property="og:title" content="Reading Between the Pings: What's Their Communication Style?">
+<meta property="og:description" content="Think of one person. Answer six quick questions. Get a read on how to talk to them.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#03050A">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2303050A'/%3E%3Cpath d='M16 4v24M4 16h24' stroke='%2300B3FF' stroke-opacity='.45' stroke-width='1.5'/%3E%3Ccircle cx='21' cy='11' r='4.5' fill='%2300F0FF'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-deep: #03050A;
+    --bg-mid: #070B14;
+    --panel: #0B1322;
+    --panel-hover: #0F1D33;
+    --line: rgba(0,190,255,0.14);
+    --line-strong: rgba(0,190,255,0.28);
+    --ink: #E8F7FF;
+    --ink-soft: #7E9AB5;
+    --lav: #1E9BFF;
+    --mint: #00F0FF;
+    --coral: #FF4D8D;
+    --butter: #7DF9FF;
+    --shadow: 0 30px 80px -30px rgba(0,0,0,0.9), 0 0 40px -10px rgba(0,170,255,0.25);
+    --glow: 0 0 12px rgba(0,240,255,0.55);
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+
+  body{
+    background:
+      radial-gradient(circle at 15% 0%, rgba(30,155,255,0.18), transparent 45%),
+      radial-gradient(circle at 90% 90%, rgba(0,240,255,0.10), transparent 45%),
+      linear-gradient(rgba(0,190,255,0.05) 1px, transparent 1px) 0 0 / 32px 32px,
+      linear-gradient(90deg, rgba(0,190,255,0.05) 1px, transparent 1px) 0 0 / 32px 32px,
+      var(--bg-deep);
+    background-attachment: fixed;
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+    padding: 40px 16px;
+    line-height:1.5;
+  }
+
+  .shell{
+    width:100%;
+    max-width: 900px;
+    background: var(--bg-mid);
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    box-shadow: var(--shadow), inset 0 1px 0 rgba(0,240,255,0.18);
+    overflow:hidden;
+    position:relative;
+  }
+  /* HUD corner brackets */
+  .shell::before, .shell::after{
+    content:'';
+    position:absolute;
+    width:18px; height:18px;
+    border: 2px solid var(--mint);
+    filter: drop-shadow(0 0 4px rgba(0,240,255,0.8));
+    pointer-events:none;
+    z-index:2;
+  }
+  .shell::before{ top:10px; left:10px; border-right:none; border-bottom:none; border-top-left-radius:6px; }
+  .shell::after{ bottom:10px; right:10px; border-left:none; border-top:none; border-bottom-right-radius:6px; }
+
+  .top-bar{
+    padding: 28px 32px 20px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .tag{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    font-weight:600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--mint);
+    background: rgba(0,240,255,0.12);
+    padding: 5px 11px;
+    border-radius: 100px;
+  }
+
+  h1{
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: clamp(24px, 5vw, 32px);
+    margin-top: 14px;
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+    text-shadow: 0 0 24px rgba(0,190,255,0.35);
+  }
+  .tag::after{
+    content:'';
+    width:6px; height:11px;
+    background: var(--mint);
+    box-shadow: var(--glow);
+    animation: blink 1.1s steps(1) infinite;
+  }
+  @keyframes blink{ 50%{ opacity:0; } }
+
+  .subtitle{
+    font-size: 14px;
+    color: var(--ink-soft);
+    margin-top: 8px;
+    max-width: 480px;
+  }
+
+  .body-grid{
+    display:grid;
+    grid-template-columns: 1.15fr 1fr;
+  }
+
+  .quiz-side{ padding: 28px 32px 32px; }
+  .map-side{
+    padding: 28px;
+    border-left: 1px solid var(--line);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    background: rgba(0,0,0,0.12);
+  }
+
+  .progress-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom: 20px;
+  }
+  .step-dots{ display:flex; gap:6px; }
+  .step-dot{
+    width:8px; height:8px;
+    border-radius:50%;
+    background: var(--line-strong);
+    transition: background 0.25s ease, transform 0.25s ease;
+  }
+  .step-dot.done{ background: var(--mint); }
+  .step-dot.current{ background: var(--lav); transform: scale(1.4); }
+
+  .step-count{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: var(--ink-soft);
+  }
+
+  .question{
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 19px;
+    line-height: 1.35;
+    margin-bottom: 18px;
+    min-height: 52px;
+  }
+  .question:focus{ outline:none; }
+
+  .options{ display:flex; flex-direction:column; gap:10px; }
+  .options.enter{ animation: slideIn 0.28s ease; }
+  @keyframes slideIn{
+    from{ opacity:0; transform: translateX(8px); }
+    to{ opacity:1; transform: translateX(0); }
+  }
+
+  .option{
+    display:flex;
+    align-items:flex-start;
+    gap:12px;
+    text-align:left;
+    background: var(--panel);
+    border: 1.5px solid var(--line);
+    border-radius: 14px;
+    padding: 13px 16px;
+    font: inherit;
+    font-size: 14.5px;
+    font-weight: 500;
+    color: var(--ink);
+    cursor:pointer;
+    transition: border-color 0.15s ease, background 0.15s ease, transform 0.12s ease;
+  }
+  .option:hover{
+    border-color: var(--lav);
+    background: var(--panel-hover);
+    transform: translateX(2px);
+    box-shadow: 0 0 14px -2px rgba(30,155,255,0.45);
+  }
+  .option:active{ transform: scale(0.98); }
+  .option.selected{
+    border-color: var(--mint);
+    background: rgba(0,240,255,0.08);
+  }
+
+  .key-hint{
+    flex-shrink:0;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:20px; height:20px;
+    margin-top:1px;
+    border-radius:6px;
+    border:1px solid var(--line-strong);
+    font-family:'JetBrains Mono', monospace;
+    font-size:10.5px;
+    font-weight:600;
+    color: var(--ink-soft);
+  }
+  .option:hover .key-hint{ border-color: var(--lav); color: var(--ink); }
+  .option.selected .key-hint{ border-color: var(--mint); color: var(--mint); }
+  @media (hover: none){ .key-hint{ display:none; } }
+
+  .nav-row{ margin-top: 18px; min-height: 18px; }
+  .back-link{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    font-weight:600;
+    letter-spacing: 0.5px;
+    color: var(--ink-soft);
+    background:none;
+    border:none;
+    cursor:pointer;
+    visibility:hidden;
+    padding: 4px 0;
+  }
+  .back-link.show{ visibility:visible; }
+  .back-link:hover{ color: var(--mint); }
+
+  /* Compass map */
+  .map-label{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight:600;
+    letter-spacing: 1.5px;
+    text-transform:uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 14px;
+  }
+
+  .map-wrap{ position:relative; margin-left: 28px; }
+
+  .compass{
+    position:relative;
+    width: 220px;
+    height: 220px;
+  }
+  .compass.small{ width:180px; height:180px; }
+
+  .compass-grid{
+    position:absolute;
+    inset:0;
+    border: 1px solid var(--line-strong);
+    border-radius: 12px;
+    overflow:hidden;
+    background:
+      linear-gradient(rgba(0,190,255,0.06) 1px, transparent 1px) 0 0 / 10% 10%,
+      linear-gradient(90deg, rgba(0,190,255,0.06) 1px, transparent 1px) 0 0 / 10% 10%;
+    box-shadow: inset 0 0 30px rgba(0,190,255,0.08);
+  }
+  /* Radar sweep */
+  .compass-sweep{
+    position:absolute;
+    inset:0;
+    border-radius:12px;
+    overflow:hidden;
+    pointer-events:none;
+  }
+  .compass-sweep::before{
+    content:'';
+    position:absolute;
+    inset:-25%;
+    background: conic-gradient(from 0deg, rgba(0,240,255,0.16), transparent 70deg);
+    animation: sweep 4s linear infinite;
+  }
+  @keyframes sweep{ to{ transform: rotate(360deg); } }
+  .compass-grid::before, .compass-grid::after{
+    content:'';
+    position:absolute;
+    background: var(--line-strong);
+  }
+  .compass-grid::before{ left:50%; top:0; bottom:0; width:1px; }
+  .compass-grid::after{ top:50%; left:0; right:0; height:1px; }
+
+  .compass-quadrant{
+    position:absolute;
+    width:50%;
+    height:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    font-weight:600;
+    line-height:1.4;
+    color: var(--ink-soft);
+    opacity: 0.35;
+    transition: opacity 0.3s ease, color 0.3s ease, background 0.3s ease;
+    text-align:center;
+  }
+  .compass-quadrant.active{ opacity: 1; color: var(--ink); background: rgba(30,155,255,0.08); }
+  .q-tl{ top:0; left:0; border-top-left-radius:12px; }
+  .q-tr{ top:0; right:0; border-top-right-radius:12px; }
+  .q-bl{ bottom:0; left:0; border-bottom-left-radius:12px; }
+  .q-br{ bottom:0; right:0; border-bottom-right-radius:12px; }
+
+  .compass-dot{
+    position:absolute;
+    z-index:1;
+    width: 14px; height:14px;
+    border-radius:50%;
+    background: var(--mint);
+    box-shadow: 0 0 0 4px rgba(0,240,255,0.25), 0 0 16px rgba(0,240,255,0.5);
+    left: 50%; top: 50%;
+    transform: translate(-50%,-50%);
+    transition: left 0.5s cubic-bezier(.4,0,.2,1), top 0.5s cubic-bezier(.4,0,.2,1), opacity 0.3s ease;
+  }
+  .compass-dot.idle{ opacity: 0.45; animation: pulse 1.8s ease-in-out infinite; }
+  @keyframes pulse{
+    0%,100%{ box-shadow: 0 0 0 4px rgba(0,240,255,0.15); }
+    50%{ box-shadow: 0 0 0 9px rgba(0,240,255,0.05); }
+  }
+
+  .axis-caption{
+    font-family:'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: var(--ink-soft);
+    text-align:center;
+    margin-top: 8px;
+    letter-spacing: 0.5px;
+  }
+  .axis-vertical{
+    position:absolute;
+    left:-14px; top:50%;
+    transform: translate(-50%,-50%) rotate(-90deg);
+    font-family:'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: var(--ink-soft);
+    letter-spacing: 0.5px;
+    white-space:nowrap;
+  }
+  .axis-vertical.small{ top: calc(50% - 12px); }
+
+  .map-hint{
+    font-size: 12px;
+    color: var(--ink-soft);
+    text-align:center;
+    margin-top: 14px;
+    max-width: 240px;
+    min-height: 36px;
+  }
+
+  /* Result screen */
+  #result-screen{ display:none; }
+
+  .result-shell{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+    padding: 8px 4px;
+  }
+
+  .result-badge{
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: clamp(24px, 5vw, 30px);
+    opacity:0;
+    animation: riseIn 0.5s ease 0.1s forwards;
+  }
+  .result-badge:focus{ outline:none; }
+
+  @keyframes riseIn{
+    from{ opacity:0; transform: translateY(10px); }
+    to{ opacity:1; transform: translateY(0); }
+  }
+
+  .result-caption{
+    font-family:'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    font-weight:600;
+    letter-spacing: 1.5px;
+    text-transform:uppercase;
+    color: var(--mint);
+    margin-top: 10px;
+    opacity:0;
+    animation: riseIn 0.5s ease 0.25s forwards;
+  }
+
+  .result-text{
+    font-size: 15px;
+    color: var(--ink-soft);
+    margin-top: 14px;
+    max-width: 460px;
+    opacity:0;
+    animation: riseIn 0.5s ease 0.4s forwards;
+  }
+
+  .blend-note{
+    display:none;
+    font-size: 13px;
+    color: var(--ink);
+    background: rgba(0,240,255,0.10);
+    border: 1px solid rgba(0,240,255,0.25);
+    border-radius: 12px;
+    padding: 10px 14px;
+    margin-top: 16px;
+    max-width: 460px;
+    opacity:0;
+    animation: riseIn 0.5s ease 0.45s forwards;
+  }
+  .blend-note.show{ display:block; }
+
+  .result-map{
+    margin-top: 26px;
+    opacity:0;
+    animation: riseIn 0.5s ease 0.5s forwards;
+  }
+
+  .focus-box{
+    text-align:left;
+    background: rgba(0,0,0,0.2);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 16px 20px;
+    margin-top: 26px;
+    width:100%;
+    max-width: 460px;
+    opacity:0;
+    animation: riseIn 0.5s ease 0.65s forwards;
+  }
+  .focus-title{
+    font-family:'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight:600;
+    letter-spacing: 1px;
+    text-transform:uppercase;
+    color: var(--mint);
+    margin-bottom: 8px;
+  }
+  .focus-box + .focus-box{ margin-top: 12px; }
+  .focus-box.avoid .focus-title{ color: var(--coral); }
+  .focus-box ul{ padding-left: 18px; }
+  .focus-box li{ font-size: 13.5px; margin-bottom: 5px; color: var(--ink); }
+  .focus-box li:last-child{ margin-bottom: 0; }
+
+  .result-actions{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:10px;
+    margin-top: 24px;
+    opacity:0;
+    animation: riseIn 0.5s ease 0.8s forwards;
+  }
+
+  .btn{
+    font-family: 'Inter', sans-serif;
+    font-size: 13.5px;
+    font-weight: 600;
+    padding: 12px 20px;
+    border-radius: 100px;
+    border: 1px solid var(--line);
+    background: var(--panel);
+    color: var(--ink);
+    cursor:pointer;
+    transition: transform 0.12s ease, border-color 0.15s ease;
+  }
+  .btn:hover{ transform: translateY(-1px); border-color: var(--lav); }
+  .btn.primary{ background: var(--lav); border-color: var(--lav); color: #03050A; }
+  .btn.primary{ box-shadow: 0 0 18px -4px rgba(30,155,255,0.8); }
+  .btn.primary:hover{ border-color: var(--ink); box-shadow: 0 0 24px -2px rgba(0,240,255,0.8); }
+
+  footer{
+    text-align:center;
+    font-family:'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    font-weight:600;
+    color: var(--ink-soft);
+    padding: 16px 32px 22px;
+    letter-spacing: 0.5px;
+    border-top: 1px solid var(--line);
+  }
+
+  @media (max-width: 720px){
+    body{ padding: 16px; }
+    .top-bar{ padding: 22px 20px 18px; }
+    .quiz-side{ padding: 22px 20px 26px; }
+    .body-grid{ grid-template-columns: 1fr; }
+    .map-side{
+      order: -1;
+      padding: 20px;
+      border-left:none;
+      border-bottom: 1px solid var(--line);
+    }
+    .map-side .compass{ width:160px; height:160px; }
+    .map-side .compass-quadrant{ font-size: 8.5px; }
+    .map-hint{ display:none; }
+    .question{ font-size: 17.5px; min-height: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .result-badge, .result-caption, .result-text, .blend-note, .result-map, .focus-box, .result-actions{
+      animation:none !important; opacity:1 !important; transform:none !important;
+    }
+    .options.enter, .compass-dot.idle, .compass-sweep::before, .tag::after{ animation:none; }
+    .compass-dot{ transition:none; }
+  }
+
+  .option:focus-visible, .btn:focus-visible, .back-link:focus-visible{
+    outline: 2px solid var(--mint);
+    outline-offset: 2px;
+  }
+
+  .sr-only{
+    position:absolute; width:1px; height:1px; overflow:hidden;
+    clip: rect(0 0 0 0); white-space:nowrap;
+  }
+</style>
+<!-- Cloudflare Web Analytics: replace YOUR_TOKEN_HERE with the token from your Cloudflare dashboard -->
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "YOUR_TOKEN_HERE"}'></script>
+</head>
+<body>
+
+<main class="shell">
+  <div class="top-bar">
+    <span class="tag">◈ reading between the pings</span>
+    <h1>What's Their Communication Style?</h1>
+    <p class="subtitle">Think of a specific client, stakeholder, or colleague. Answer for how they actually behave, and watch where they land.</p>
+  </div>
+
+  <div class="body-grid" id="quiz-screen">
+    <section class="quiz-side" aria-label="Questions">
+      <div class="progress-row">
+        <div class="step-dots" id="step-dots" aria-hidden="true"></div>
+        <div class="step-count" id="step-count"></div>
+      </div>
+      <h2 class="question" id="question-text" tabindex="-1" aria-live="polite"></h2>
+      <div class="options" id="options-container" role="group" aria-labelledby="question-text"></div>
+      <div class="nav-row">
+        <button class="back-link" id="back-btn">← back</button>
+      </div>
+    </section>
+
+    <aside class="map-side" aria-hidden="true">
+      <div class="map-label">live read</div>
+      <div class="map-wrap">
+        <div class="axis-vertical">PEOPLE ← → TASK</div>
+        <div class="compass">
+          <div class="compass-grid"></div>
+          <div class="compass-sweep"></div>
+          <div class="compass-quadrant q-tl" data-q="tl">TASK<br>DELIBERATE</div>
+          <div class="compass-quadrant q-tr" data-q="tr">TASK<br>FAST</div>
+          <div class="compass-quadrant q-bl" data-q="bl">PEOPLE<br>DELIBERATE</div>
+          <div class="compass-quadrant q-br" data-q="br">PEOPLE<br>FAST</div>
+          <div class="compass-dot idle" id="compass-dot"></div>
+        </div>
+        <div class="axis-caption">DELIBERATE ← → FAST-PACED</div>
+      </div>
+      <p class="map-hint" id="map-hint">The dot moves as you answer.</p>
+    </aside>
+  </div>
+
+  <section id="result-screen" aria-label="Result">
+    <div class="quiz-side">
+      <div class="result-shell">
+        <h2 class="result-badge" id="badge-text" tabindex="-1"></h2>
+        <div class="result-caption" id="verdict-caption"></div>
+        <p class="result-text" id="verdict-text"></p>
+        <p class="blend-note" id="blend-note"></p>
+        <div class="result-map" aria-hidden="true">
+          <div class="map-wrap">
+            <div class="axis-vertical small">PEOPLE ← → TASK</div>
+            <div class="compass small" id="compass-result">
+              <div class="compass-grid"></div>
+          <div class="compass-sweep"></div>
+              <div class="compass-quadrant q-tl" data-q="tl">TASK<br>DELIBERATE</div>
+              <div class="compass-quadrant q-tr" data-q="tr">TASK<br>FAST</div>
+              <div class="compass-quadrant q-bl" data-q="bl">PEOPLE<br>DELIBERATE</div>
+              <div class="compass-quadrant q-br" data-q="br">PEOPLE<br>FAST</div>
+              <div class="compass-dot" id="compass-dot-result"></div>
+            </div>
+            <div class="axis-caption">DELIBERATE ← → FAST-PACED</div>
+          </div>
+        </div>
+        <div class="focus-box">
+          <div class="focus-title">How to adapt your approach</div>
+          <ul id="focus-list"></ul>
+        </div>
+        <div class="focus-box avoid">
+          <div class="focus-title">What to avoid</div>
+          <ul id="avoid-list"></ul>
+        </div>
+        <div class="result-actions">
+          <button class="btn primary" id="copy-btn">Copy these tips</button>
+          <button class="btn" id="retake-btn">Read someone else</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>a quick behavioral read, not a personality diagnosis</footer>
+</main>
+
+<script>
+  const questions = [
+    {
+      text: "You send them a message with a question. What actually happens?",
+      axis: "pace",
+      options: [
+        { label: "It sits for a while, they reply once they've thought it through", points: 0 },
+        { label: "You get a reply within the day, nothing urgent-feeling", points: 1 },
+        { label: "They're already typing back before you've closed the tab", points: 2 }
+      ]
+    },
+    {
+      text: "You open a meeting with them. Where do they want to start?",
+      axis: "focus",
+      options: [
+        { label: "Catching up first, how's everyone doing, what's new", points: 0 },
+        { label: "A quick check-in, then into the actual agenda", points: 1 },
+        { label: "No preamble, straight to the numbers and the ask", points: 2 }
+      ]
+    },
+    {
+      text: "You bring them two options and ask which one to go with. What happens?",
+      axis: "pace",
+      options: [
+        { label: "They want to sit with it, maybe loop in a few more people", points: 0 },
+        { label: "They ask a couple clarifying questions, then pick one", points: 1 },
+        { label: "They pick one on the spot and move the conversation forward", points: 2 }
+      ]
+    },
+    {
+      text: "You're giving them a status update. What do they actually want to hear?",
+      axis: "focus",
+      options: [
+        { label: "How the team's holding up and who might need support", points: 0 },
+        { label: "A mix, some context on people, some on the numbers", points: 1 },
+        { label: "The metrics, the risk, and what it means for the bottom line", points: 2 }
+      ]
+    },
+    {
+      text: "Something changes last-minute and plans need to shift. How do they react?",
+      axis: "pace",
+      options: [
+        { label: "They need a beat to process before they can respond", points: 0 },
+        { label: "A few questions, then they adjust without much friction", points: 1 },
+        { label: "They've already pivoted before you finish explaining why", points: 2 }
+      ]
+    },
+    {
+      text: "What's the fastest way to lose their trust in how you communicate?",
+      axis: "focus",
+      options: [
+        { label: "Being purely transactional, no acknowledgment of them as a person", points: 0 },
+        { label: "Being inconsistent, sometimes warm, sometimes all-business", points: 1 },
+        { label: "Wasting their time with small talk or a vague ask", points: 2 }
+      ]
+    }
+  ];
+
+  const verdicts = {
+    tr: {
+      badge: "⟫ The Closer",
+      name: "The Closer",
+      caption: "TASK-FOCUSED · FAST-PACED",
+      text: "They want the bottom line, fast. Long preambles and relationship small talk will lose them. Efficiency reads as respect to this person.",
+      color: "#00F0FF",
+      focus: [
+        "Lead with the conclusion, then back into detail if asked",
+        "Come with options and a recommendation, not just a question",
+        "Keep updates short, they'll ask if they want more"
+      ],
+      avoid: [
+        "Burying the ask at the end of a long message",
+        "Showing up to a decision meeting without a recommendation"
+      ]
+    },
+    tl: {
+      badge: "◧ The Architect",
+      name: "The Architect",
+      caption: "TASK-FOCUSED · DELIBERATE",
+      text: "They want the data and the time to actually think it through. Rushing them or skipping detail tends to erode trust, not build it.",
+      color: "#2E8BFF",
+      focus: [
+        "Send detail in writing ahead of a conversation, not cold",
+        "Don't push for an on-the-spot decision, give them room",
+        "Back up recommendations with the reasoning, not just the ask"
+      ],
+      avoid: [
+        "Hand-waving past the numbers or the risks",
+        "Manufacturing urgency to force a faster answer"
+      ]
+    },
+    br: {
+      badge: "✦ The Spark",
+      name: "The Spark",
+      caption: "PEOPLE-FOCUSED · FAST-PACED",
+      text: "They're energized by momentum and connection. Dry, all-business updates can feel cold to them, even when the content's right.",
+      color: "#7DF9FF",
+      focus: [
+        "Open with a genuine check-in before diving into the ask",
+        "Bring energy and enthusiasm, not just facts",
+        "Keep things moving, they lose interest in long, static discussions"
+      ],
+      avoid: [
+        "Wall-of-text updates with no human in them",
+        "Letting a conversation stall in the details"
+      ]
+    },
+    bl: {
+      badge: "◎ The Anchor",
+      name: "The Anchor",
+      caption: "PEOPLE-FOCUSED · DELIBERATE",
+      text: "They value consistency and trust built over time. Sudden asks or overly aggressive pushes tend to make them dig in, not move faster.",
+      color: "#6C8CFF",
+      focus: [
+        "Give them time to warm up to a change, don't force urgency",
+        "Check in personally, not just transactionally",
+        "Be patient, their buy-in tends to be durable once you have it"
+      ],
+      avoid: [
+        "Springing big changes on them without a heads-up",
+        "Only reaching out when you need something"
+      ]
+    }
+  };
+
+  let currentQ = 0;
+  const answers = [];
+
+  const quizScreen = document.getElementById('quiz-screen');
+  const resultScreen = document.getElementById('result-screen');
+  const questionText = document.getElementById('question-text');
+  const optionsContainer = document.getElementById('options-container');
+  const backBtn = document.getElementById('back-btn');
+  const stepDotsEl = document.getElementById('step-dots');
+  const stepCountEl = document.getElementById('step-count');
+  const mapHint = document.getElementById('map-hint');
+  const liveCompass = document.querySelector('.map-side .compass');
+  const liveDot = document.getElementById('compass-dot');
+
+  function renderStepDots(){
+    stepDotsEl.innerHTML = '';
+    questions.forEach((_, idx) => {
+      const dot = document.createElement('div');
+      dot.className = 'step-dot';
+      if(idx < currentQ) dot.classList.add('done');
+      if(idx === currentQ) dot.classList.add('current');
+      stepDotsEl.appendChild(dot);
+    });
+    stepCountEl.textContent = `${currentQ + 1} of ${questions.length}`;
+  }
+
+  // Read one axis from the answers given so far (up to, not including, `upTo`).
+  // Each answer is 0/1/2, so the midpoint is 1 per answer. Returns the position
+  // along the axis (0–1) and which side it leans: 'high', 'low', or 'even'.
+  function readAxis(axis, upTo){
+    const given = answers.slice(0, upTo).filter(a => a && a.axis === axis);
+    if(!given.length) return { pos: 0.5, lean: 'even', count: 0 };
+    const score = given.reduce((sum, a) => sum + a.points, 0);
+    const mid = given.length;
+    let lean = score > mid ? 'high' : score < mid ? 'low' : 'even';
+    // Dead center: let the most recent decisive answer break the tie.
+    if(lean === 'even'){
+      const decisive = [...given].reverse().find(a => a.points !== 1);
+      if(decisive) lean = decisive.points === 2 ? 'high' : 'low';
+    }
+    let pos = score / (2 * given.length);
+    // Nudge a tie-broken dot off the center line so it sits in its quadrant.
+    if(pos === 0.5 && lean !== 'even') pos += lean === 'high' ? 0.06 : -0.06;
+    return { pos, lean, count: given.length };
+  }
+
+  function quadrantFor(focusLean, paceLean){
+    const task = focusLean === 'high';
+    const fast = paceLean === 'high';
+    return (task ? 't' : 'b') + (fast ? 'r' : 'l');
+  }
+
+  function placeDot(dotEl, focus, pace){
+    // Keep the dot inset from the edges so extreme answers stay inside the box.
+    const inset = p => 8 + p * 84;
+    dotEl.style.left = inset(pace.pos) + '%';
+    dotEl.style.top = (100 - inset(focus.pos)) + '%';
+  }
+
+  function highlightQuadrant(compassEl, q){
+    compassEl.querySelectorAll('.compass-quadrant').forEach(el => {
+      el.classList.toggle('active', el.dataset.q === q);
+    });
+  }
+
+  function updateLiveCompass(){
+    const focus = readAxis('focus', currentQ);
+    const pace = readAxis('pace', currentQ);
+    placeDot(liveDot, focus, pace);
+    const started = focus.count + pace.count > 0;
+    liveDot.classList.toggle('idle', !started);
+
+    if(focus.count && pace.count && focus.lean !== 'even' && pace.lean !== 'even'){
+      const q = quadrantFor(focus.lean, pace.lean);
+      highlightQuadrant(liveCompass, q);
+      mapHint.textContent = `Leaning ${verdicts[q].name} so far.`;
+    } else {
+      highlightQuadrant(liveCompass, null);
+      mapHint.textContent = started ? 'Still getting a read…' : 'The dot moves as you answer.';
+    }
+  }
+
+  function renderQuestion(focusQuestion){
+    const q = questions[currentQ];
+    questionText.textContent = q.text;
+    optionsContainer.innerHTML = '';
+    optionsContainer.classList.remove('enter');
+    void optionsContainer.offsetWidth;
+    optionsContainer.classList.add('enter');
+
+    const prev = answers[currentQ];
+    q.options.forEach((opt, idx) => {
+      const btn = document.createElement('button');
+      btn.className = 'option';
+      if(prev && prev.choice === idx){
+        btn.classList.add('selected');
+        btn.setAttribute('aria-pressed', 'true');
+      }
+      const key = document.createElement('span');
+      key.className = 'key-hint';
+      key.setAttribute('aria-hidden', 'true');
+      key.textContent = idx + 1;
+      const label = document.createElement('span');
+      label.textContent = opt.label;
+      btn.append(key, label);
+      btn.addEventListener('click', () => selectOption(idx));
+      optionsContainer.appendChild(btn);
+    });
+
+    renderStepDots();
+    backBtn.classList.toggle('show', currentQ > 0);
+    updateLiveCompass();
+    if(focusQuestion) questionText.focus({ preventScroll: true });
+  }
+
+  function selectOption(idx){
+    const q = questions[currentQ];
+    answers[currentQ] = { axis: q.axis, points: q.options[idx].points, choice: idx };
+    if(currentQ < questions.length - 1){
+      currentQ++;
+      renderQuestion(true);
+    } else {
+      showResult();
+    }
+  }
+
+  backBtn.addEventListener('click', () => {
+    if(currentQ > 0){
+      currentQ--;
+      renderQuestion(true);
+    }
+  });
+
+  document.addEventListener('keydown', e => {
+    if(e.metaKey || e.ctrlKey || e.altKey) return;
+    if(quizScreen.style.display === 'none') return;
+    const n = parseInt(e.key, 10);
+    if(n >= 1 && n <= questions[currentQ].options.length){
+      e.preventDefault();
+      selectOption(n - 1);
+    } else if(e.key === 'Backspace' && currentQ > 0){
+      e.preventDefault();
+      backBtn.click();
+    }
+  });
+
+  let currentVerdict = null;
+
+  function showResult(){
+    quizScreen.style.display = 'none';
+    resultScreen.style.display = 'block';
+
+    const focus = readAxis('focus', questions.length);
+    const pace = readAxis('pace', questions.length);
+    // A perfectly even axis (all middle answers) defaults to the people / deliberate side,
+    // and the blend note below points them at the neighboring style too.
+    const q = quadrantFor(focus.lean, pace.lean);
+    const verdict = verdicts[q];
+    currentVerdict = verdict;
+
+    const badgeEl = document.getElementById('badge-text');
+    badgeEl.textContent = verdict.badge;
+    badgeEl.style.color = verdict.color;
+    badgeEl.style.textShadow = `0 0 22px ${verdict.color}90`;
+    document.getElementById('verdict-caption').textContent = verdict.caption;
+    document.getElementById('verdict-text').textContent = verdict.text;
+
+    const blendEl = document.getElementById('blend-note');
+    const blends = [];
+    if(focus.lean === 'even') blends.push({ axis: 'people vs. task', other: verdicts['t' + q[1]] });
+    if(pace.lean === 'even') blends.push({ axis: 'pace', other: verdicts[q[0] + 'r'] });
+    if(blends.length){
+      const axes = blends.map(b => b.axis).join(' and ');
+      const others = blends.map(b => b.other.name).join(' and ');
+      blendEl.textContent = `They sit right on the line for ${axes}, so they flex. Skim the tips for ${others} too.`;
+      blendEl.classList.add('show');
+    } else {
+      blendEl.classList.remove('show');
+    }
+
+    const resultCompass = document.getElementById('compass-result');
+    const resultDot = document.getElementById('compass-dot-result');
+    resultDot.style.background = verdict.color;
+    resultDot.style.boxShadow = `0 0 0 4px ${verdict.color}40, 0 0 16px ${verdict.color}80`;
+    placeDot(resultDot, focus, pace);
+    highlightQuadrant(resultCompass, q);
+
+    fillList('focus-list', verdict.focus);
+    fillList('avoid-list', verdict.avoid);
+
+    // Restart the entrance animations on a retake.
+    resultScreen.querySelectorAll('[class]').forEach(el => {
+      el.style.animation = 'none';
+      void el.offsetWidth;
+      el.style.animation = '';
+    });
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    badgeEl.focus({ preventScroll: true });
+  }
+
+  function fillList(id, items){
+    const list = document.getElementById(id);
+    list.innerHTML = '';
+    items.forEach(item => {
+      const li = document.createElement('li');
+      li.textContent = item;
+      list.appendChild(li);
+    });
+  }
+
+  const copyBtn = document.getElementById('copy-btn');
+  copyBtn.addEventListener('click', async () => {
+    const v = currentVerdict;
+    const text = [
+      `${v.badge} (${v.caption.toLowerCase()})`,
+      v.text,
+      '',
+      'How to adapt:',
+      ...v.focus.map(f => `• ${f}`),
+      '',
+      'What to avoid:',
+      ...v.avoid.map(a => `• ${a}`),
+      '',
+      `Reading Between the Pings: ${location.href}`
+    ].join('\n');
+    try{
+      await navigator.clipboard.writeText(text);
+      copyBtn.textContent = 'Copied ✓';
+    } catch {
+      copyBtn.textContent = "Couldn't copy";
+    }
+    setTimeout(() => { copyBtn.textContent = 'Copy these tips'; }, 1800);
+  });
+
+  document.getElementById('retake-btn').addEventListener('click', () => {
+    currentQ = 0;
+    answers.length = 0;
+    resultScreen.style.display = 'none';
+    quizScreen.style.display = '';
+    renderQuestion(true);
+  });
+
+  renderQuestion(false);
+</script>
+
+</body>
+</html>
